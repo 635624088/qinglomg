@@ -4,9 +4,10 @@
 
 ## 目录结构
 
-- `yyb-scripts/` — YYB 相关脚本
+- `yyb-scripts/` — 我自用的各类 YYB / 自动化脚本（青龙脚本目录下**全部顶层** `.py` / `.js`，已排除 `.bak` 备份与运行时数据文件）
   - 13 个主脚本：`lt.py`(联通) `jdkd.py`(京东快递) `fzqd.py`(飞猪) `netease_full.js`(网易云) `qqmusic.py`(QQ音乐) `microsoft_rewards.js`(微软积分) `yb.py`(元宝AI) `cw.js`(创维) `hxaj.js`(海信) `chzhjj.py`(长虹) `jgpy.js`(交个朋友) `hshj.js`(红色火箭) `paid.js`(平安i动)
-  - 调度/编排脚本：`sync_yyb_go.py` `yyb_runall*.py` `yyb_rerun2.py` `__yyb.py` `__acct.py` `furongwang_qinglong.py` `cdf_checkin.py`
+  - 同步 / 调度 / 编排脚本：`sync_yyb_go.py` `yyb_runall*.py` `yyb_rerun*.py` `__yyb.py` `__acct.py` `furongwang_qinglong.py` `cdf_checkin.py` 等
+  - 其它任务脚本：工会签到(`gh_task_qinglong.py`)、抽奖(`hhl1916_*` `sf_midautumn.py` `samyang_*` `junpinhui_dati_yyb.py`)、君品荟(`君品荟.py`)、知了快看(`知了快看_多号任务版.js`)等
   - `env.sh`：青龙环境变量加载脚本（已脱敏，密码替换为 `YOUR_QL_PASSWORD`）
   - `gh_deploy/`：工会/抽奖等任务脚本（**仅含代码，运行时 token 缓存、银行信息等已剔除**）
 - `xjskp-sync-multi/` — [KxinCC/xjskp-sync-multi](https://github.com/KxinCC/xjskp-sync-multi) 的 **Windows→Linux 移植版**（Node ≥ 22，去除 DPAPI / 命名管道等 Windows 依赖，改用 AES-256-GCM + 回环 TCP 端口锁）。原作者署名与说明保留在其 `README.md` / `AGENTS.md` 中。
