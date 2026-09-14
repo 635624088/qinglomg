@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>鲜花小镇自动化控制台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="title-block">
+        <h1>鲜花小镇自动化控制台</h1>
+      </div>
+      <div class="topbar-actions">
+        <span class="meta-pill">端口 <strong id="servicePort">-</strong></span>
+        <span class="meta-pill">服务 PID <strong id="servicePid">-</strong></span>
+        <span class="meta-pill">刷新 <strong id="refreshTime">-</strong></span>
+        <span class="meta-pill">运行锁 <strong id="lockState">-</strong></span>
+        <span id="gameVersionMeta" class="meta-pill game-version-meta code-version-meta" data-state="unknown" title="代码版本尚未检查">
+          代码 <strong id="localGameVersion">-</strong>
+          <span class="version-divider">/</span>
+          官方 <strong id="remoteGameVersion">-</strong>
+          <span class="version-divider">·</span>
+          <span id="gameCodeReviewState" class="version-status">未检查</span>
+        </span>
+        <span id="gameDataVersionMeta" class="meta-pill game-version-meta data-version-meta" data-state="unknown" title="数据版本状态未知">
+          数据 <strong id="activeGameDataVersion">-</strong>
+          <span class="version-source">（来源 <strong id="activeGameDataSourceCodeVersion">-</strong>）</span>
+          <span class="version-divider">·</span>
+          <span id="gameDataSyncState" class="version-status">未知</span>
+        </span>
+        <button id="remoteAccessButton" title="配置节点小宝等远程访问地址">远程访问设置</button>
+        <button id="refreshButton" title="重新读取账号、任务和监控状态">刷新</button>
+        <button id="closeSystemButton" class="danger">关闭系统</button>
+      </div>
+    </header>
+
+    <section id="remoteAccessPanel" class="remote-access-panel" hidden>
+      <div class="remote-access-heading">
+        <div>
+          <h2>远程访问设置</h2>
+          <p>默认仅本机可访问控制台。配置节点小宝等内网穿透的访问地址后，可通过对应 IP 访问；不配置则节点小宝转发一律拒绝。</p>
+        </div>
+      </div>
+      <label class="remote-access-field">
+        允许的访问地址（逗号分隔）
+        <textarea id="allowedHostsInput" rows="3" spellcheck="false" placeholder="例如：100.66.1.2"></textarea>
+      </label>
+      <div class="remote-access-actions">
+        <button id="saveAllowedHostsButton" class="primary">保存</button>
+        <span class="hint">保存后立即生效，无需重启系统。</span>
+      </div>
+    </section>
+
+    <section id="legacyBanner" class="legacy-banner" hidden>
+      <div>
+        <strong>检测到旧自动化进程</strong>
+        <p>启动当前账号时会先停止这些旧进程，再由绿色包接管；也可以手动先停止旧进程。</p>
+      </div>
+      <div class="legacy-actions">
+        <button id="stopLegacyButton">停止旧进程</button>
+        <button id="takeoverButton" class="primary">停止并启动当前账号</button>
+      </div>
+      <div id="legacyList" class="legacy-list"></div>
+    </section>
+
+    <section class="dashboard-grid">
+      <aside class="panel account-panel">
+        <div class="panel-header">
+          <div>
+            <h2>账号启动向导</h2>
+          </div>
+          <button id="reloadProfilesButton">刷新账号</button>
+        </div>
+
+        <section id="wizardPanel" class="wizard-panel">
+          <div class="wizard-heading">
+            <span id="wizardBadge" class="status-badge neutral">检查中</span>
+            <div>
+              <h3 id="wizardTitle">正在检查账号凭据</h3>
+              <p id="wizardText">
+                <span id="wizardCopyLoading">控制台会优先检查绿色包账号；若发现旧 work/game-secrets.json，会引导一键迁移。</span>
+                <span id="wizardCopyMissing" hidden>粘贴 cURL / HAR / 请求头，或手动补齐 CTOKEN、PC_USER_ID、PC_TOKEN、BABI_TOKEN、OPEN_ID。</span>
+                <span id="wizardCopyInvalid" hidden><span id="wizardValidationError"></span></span>
+                <span id="wizardCopyReadyValidated" hidden>凭据完整，已验证 <span id="wizardValidatedAt">-</span>。建议先查订单，再启动循环。</span>
+                <span id="wizardCopyReadyUnvalidated" hidden>凭据完整。建议先点击“验证账号”执行一次只读订单查询。</span>
+                <span id="wizardCopyLegacyFound" hidden>已在旧 work/game-secrets.json 中发现完整凭据，可迁移为绿色包账号：<span id="wizardMigrationProfileId">旧账号</span>。</span>
+                <span id="wizardCopyProfileMissing" hidden>账号档案存在，但凭据不完整。可重新导入，或先迁移旧凭据。</span>
+                <span id="wizardCopyLegacyIncomplete" hidden>检测到旧 game-secrets.json，但字段不完整，请重新粘贴请求凭据。</span>
+              </p>
+            </div>
+          </div>
+          <div id="wizardMissing" class="missing-fields" hidden>
+            <strong>缺少字段</strong>
+            <div id="wizardMissingItems" class="missing-field-items"></div>
+          </div>
+          <div class="wizard-actions">
+            <button id="migrateLegacyButton" class="primary">一键迁移旧账号</button>
+            <button id="validateProfileButton">验证账号</button>
+            <button id="openImportButton">粘贴 cURL / HAR / 请求头</button>
+          </div>
+        </section>
+
+        <div class="profile-toolbar">
+          <p class="eyebrow">ACCOUNTS</p>
+          <span id="profileCount"><span id="profileCountValue">0</span> 个账号</span>
+        </div>
+        <div id="profiles" class="profile-list">
+          <div id="profilesEmpty" class="empty-state">暂无绿色包账号。可迁移旧凭据，或粘贴 cURL / HAR / 请求头导入。</div>
+          <div id="profileItems" class="profile-items"></div>
+        </div>
+        <div class="account-actions">
+          <button id="resetCredentialsButton">重置当前账号凭据</button>
+        </div>
+      </aside>
+
+      <section class="right-workspace">
+        <section class="top-workspace">
+        <section class="panel task-panel">
+          <div class="panel-header">
+            <div>
+              <h2>任务控制</h2>
+            </div>
+            <span class="profile-chip"><span id="selectedProfileLabel">未选择账号</span><span id="selectedProfileIdWrap" hidden> (<span id="selectedProfileIdValue"></span>)</span></span>
+          </div>
+
+          <div class="task-grid">
+            <div>
+              <span class="label">当前模式</span>
+              <strong id="taskMode">待命</strong>
+            </div>
+            <div>
+              <span class="label">当前 PID</span>
+              <strong id="taskPid">-</strong>
+            </div>
+            <div>
+              <span class="label">启动时间</span>
+              <strong id="taskStartedAt">-</strong>
+            </div>
+            <div>
+              <span class="label">双倍金币剩余</span>
+              <strong id="nextRunText">-</strong>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <button id="startButton" class="primary">启动循环</button>
+            <button id="stopButton">停止任务</button>
+            <button id="onceButton">执行一轮</button>
+            <button id="ordersButton">只查订单</button>
+            <button id="checkGameVersionButton" disabled title="请先选择账号">检查游戏官方版本</button>
+            <button id="syncGameDataButton" disabled title="请先选择账号">同步最新版游戏代码和数据</button>
+          </div>
+
+          <p id="gameDataSyncFeedback" class="game-data-sync-feedback" data-state="neutral" hidden></p>
+
+          <div id="accountLevelSummary" class="account-level-summary">
+            <span id="accountServerSummary" class="account-summary-chip">区服 <strong id="accountServerSummaryValue">-</strong></span>
+            <span id="accountLevelValueSummary" class="account-summary-chip">等级 <strong id="accountLevelValueSummaryValue">-</strong></span>
+            <span id="accountExperienceSummary" class="account-summary-chip">经验 <strong id="accountExperienceSummaryValue">-</strong></span>
+          </div>
+          <div id="artifactLinks" class="artifact-links task-artifact-links" hidden>
+            <a id="artifactStatusPageLink" target="_blank" rel="noreferrer">状态页</a>
+            <a id="artifactStatusJsonLink" target="_blank" rel="noreferrer">状态 JSON</a>
+            <a id="artifactOrderJsonLink" target="_blank" rel="noreferrer">订单 JSON</a>
+          </div>
+        </section>
+
+        <aside class="panel summary-panel">
+          <div class="panel-header">
+            <div>
+              <h2>状态摘要</h2>
+            </div>
+            <span id="statusAge" class="status-dot muted"><span id="statusAgeLabel">暂无状态</span> <span id="statusAgeValue"></span></span>
+          </div>
+
+          <div class="summary-columns">
+            <section class="summary-section land-section">
+              <h3>土地</h3>
+              <div class="metric-grid">
+                <div><span>总数</span><strong id="landTotal">-</strong></div>
+                <div><span>空地</span><strong id="landEmpty">-</strong></div>
+                <div><span>成长中</span><strong id="landGrowing">-</strong></div>
+                <div><span>可收获</span><strong id="landMature">-</strong></div>
+              </div>
+              <p class="countdown">下一批成熟：<strong id="nextMatureText">-</strong></p>
+            </section>
+
+            <section class="summary-section water-section">
+              <h3>水滴</h3>
+              <div class="water-line">
+                <strong id="waterDropText">-</strong>
+                <span>下一滴 <em id="waterNextText">-</em></span>
+                <span id="waterNeedText">-</span>
+              </div>
+            </section>
+
+            <section class="summary-section resource-section">
+              <h3>资源</h3>
+              <div id="resourceGrid" class="resource-grid">
+                <div class="metric"><span>金币</span><strong id="resourceGoldValue">-</strong></div>
+                <div class="metric"><span>珍珠</span><strong id="resourcePearlValue">-</strong></div>
+                <div class="metric"><span>花坊币</span><strong id="resourceFlowerShopCoinValue">-</strong></div>
+                <div class="metric"><span>丝绸</span><strong id="resourceSatinSilkValue">-</strong></div>
+                <div class="metric"><span>建材</span><strong id="resourceBuildingMaterialValue">-</strong></div>
+                <div class="metric"><span>元宝</span><strong id="resourceYuanbaoValue">-</strong></div>
+                <div class="metric"><span>雇佣卡</span><strong id="resourceHireItemCountValue">-</strong></div>
+              </div>
+            </section>
+
+            <section class="summary-section risk-section risk">
+              <h3>风险</h3>
+              <div id="riskGrid" class="risk-grid">
+                <div id="riskErrorsMetric" class="metric"><span>错误数</span><strong id="riskErrorsValue">0</strong></div>
+                <div id="riskStatusMetric" class="metric"><span>状态</span><strong id="riskStatusValue">暂无状态</strong></div>
+                <div id="riskLoginMetric" class="metric"><span>登录态</span><strong id="riskLoginValue">待验证</strong></div>
+                <div id="riskCredentialsMetric" class="metric"><span>凭据</span><strong id="riskCredentialsValue">不完整</strong></div>
+              </div>
+            </section>
+          </div>
+        </aside>
+        </section>
+
+        <section class="monitor-panel">
+      <div class="monitor-header">
+        <div>
+          <h2>自动化监控</h2>
+          <div id="queueTabs" class="queue-tabs" role="tablist" aria-label="自动化监控分类">
+            <button id="queueTabCommon" type="button" class="active" data-queue-tab="common" role="tab" aria-selected="true">常用</button>
+            <button id="queueTabSecondary" type="button" data-queue-tab="secondary" role="tab" aria-selected="false">不常用</button>
+            <button id="queueTabActivities" type="button" data-queue-tab="activities" role="tab" aria-selected="false">莳花纪闻</button>
+            <button id="queueTabCyclicNote" type="button" data-queue-tab="cyclic-note" role="tab" aria-selected="false">花笺集芳</button>
+            <button id="queueTabTeamOrders" type="button" data-queue-tab="team-orders" role="tab" aria-selected="false">组团订单</button>
+          </div>
+        </div>
+        <span id="cycleLine"><span>周期 </span><strong id="queueCycleValue">-</strong><span> / 步骤 </span><strong id="queueStepValue">-</strong></span>
+      </div>
+
+      <div id="automationStopBanner" class="automation-stop-banner" hidden>
+        <strong id="automationStopTitle"></strong>
+        <span id="automationStopMessage"></span>
+      </div>
+      <div id="settingsTransactionPanel" class="settings-transaction-panel" data-state="unavailable" aria-live="polite" hidden>
+        <span id="settingsTransactionStatus">设置状态尚未加载</span>
+        <div class="settings-transaction-actions">
+          <button id="settingsReconcileButton" type="button" class="secondary" hidden>重新确认</button>
+          <button id="settingsAdoptCurrentButton" type="button" class="secondary" hidden>采用当前值</button>
+          <button id="settingsReapplyButton" type="button" hidden>重新应用我的值</button>
+        </div>
+      </div>
+      <div id="queueMatrix" class="queue-matrix"></div>
+      <section id="teamOrderPanel" class="team-order-console" aria-labelledby="teamOrderTitle" hidden>
+        <div class="team-order-heading">
+          <div>
+            <h3 id="teamOrderTitle">组团订单挑战</h3>
+            <p>仅显示最近 7 天的完成记录，硬盘归档与日志保持不变</p>
+          </div>
+          <span id="teamOrderPageText"></span>
+        </div>
+        <div id="teamOrderProtectionControl" class="team-order-protection-control"></div>
+        <div id="teamOrderArchiveList" class="team-order-archive-list"></div>
+      </section>
+
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="importDialog" class="import-dialog">
+    <form method="dialog">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">IMPORT ACCOUNT</p>
+          <h2>导入 / 更新账号</h2>
+        </div>
+        <button id="closeImportButton" value="cancel">关闭</button>
+      </div>
+    </form>
+    <div class="import-body">
+      <label>
+        账号名称
+        <input id="profileLabel" placeholder="例如：主号">
+      </label>
+      <label>
+        请求文本 / cURL / HAR
+        <textarea id="credentialText" spellcheck="false" placeholder="粘贴 Chrome/Edge 复制为 cURL、HAR 请求片段，或请求头文本"></textarea>
+      </label>
+      <div class="field-grid">
+        <label>PC_USER_ID<input id="manualPcUserId"></label>
+        <label>OPEN_ID<input id="manualOpenId"></label>
+        <label>CTOKEN<input id="manualCtoken"></label>
+        <label>PC_TOKEN<input id="manualPcToken"></label>
+        <label>BABI_TOKEN<input id="manualBabiToken"></label>
+      </div>
+      <button id="importButton" class="primary">导入 / 更新账号</button>
+      <p class="hint">凭据保存到绿色包 runtime/accounts，并使用当前 Windows 用户 DPAPI 加密；换电脑后需要重新导入。</p>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

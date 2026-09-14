@@ -1,0 +1,11 @@
+/bin/
+/runtime/
+/outputs/
+/work/game-secrets.json
+*.log
+*.tmp
+*.lock
+*.pem
+*.key
+*.pfx
+*.p12

@@ -1,0 +1,1 @@
+../../sync_yyb_go.py

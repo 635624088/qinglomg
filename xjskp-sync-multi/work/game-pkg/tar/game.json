@@ -1,0 +1,1 @@
+{"networkTimeout":{"connectSocket":5000,"download":500000,"request":5000,"upload":5000},"screenOrientation":"portrait","showStatusBar":false,"subpackages":[{"name":"jsplugins","root":"src/assets/scripts/"},{"name":"common","root":"common/"}]}

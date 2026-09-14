@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "createdAtUtc": "2026-07-16T10:07:13.1149122Z",
+  "sourceRoot": "xjskp-sync-multi",
+  "targetRoot": "xjskp-sync-multi-next",
+  "gitHead": "0c166b6b405b832b534c8242c49ee5cfe8e57252",
+  "sourceGitStatus": [
+    " M xjskp-sync-multi/AGENTS.md",
+    " M xjskp-sync-multi/work/flower-rack-state.mjs",
+    " M xjskp-sync-multi/work/game-pkg-2021004163668677-latest.bin",
+    " M xjskp-sync-multi/work/game-pkg-latest/2021004163668677.tar",
+    " M xjskp-sync-multi/work/game-pkg-latest/CERT.json",
+    " M xjskp-sync-multi/work/game-pkg-latest/Manifest.xml",
+    " M xjskp-sync-multi/work/game-pkg-latest/SIGN.json",
+    " M xjskp-sync-multi/work/game-pkg-latest/tar/game.js",
+    " M xjskp-sync-multi/work/game-pkg-latest/tar/modules.json",
+    " M xjskp-sync-multi/work/garden-state.mjs",
+    " M xjskp-sync-multi/work/garden-state.test.mjs",
+    " M xjskp-sync-multi/work/inspect-garden-cycle.test.mjs",
+    " M xjskp-sync-multi/work/inspect-garden-dryrun.mjs",
+    " M xjskp-sync-multi/work/latest-game-info.json",
+    " M xjskp-sync-multi/work/order-state.mjs",
+    " M xjskp-sync-multi/work/order-state.test.mjs",
+    " M xjskp-sync-multi/work/pearl-state.mjs",
+    " M xjskp-sync-multi/work/static-config-path.mjs",
+    " M xjskp-sync-multi/work/static-config-path.test.mjs",
+    " M xjskp-sync-multi/work/system-process-manager.test.mjs",
+    " M xjskp-sync-multi/work/system-public-app.test.mjs",
+    " M xjskp-sync-multi/work/system-server.test.mjs",
+    " M xjskp-sync-multi/work/system/automation-worker.mjs",
+    " M xjskp-sync-multi/work/system/dpapi.mjs",
+    " M xjskp-sync-multi/work/system/process-manager.mjs",
+    " M xjskp-sync-multi/work/system/public/app.js",
+    " M xjskp-sync-multi/work/system/server.mjs",
+    "?? xjskp-sync-multi/ANALYSE.md",
+    "?? xjskp-sync-multi/work/g-data.6cfce.text",
+    "?? xjskp-sync-multi/work/g-data.9dc40.text",
+    "?? xjskp-sync-multi/work/resources-config-578a1.json",
+    "?? xjskp-sync-multi/work/resources-config-bce02.json",
+    "?? xjskp-sync-multi/work/system-dpapi.test.mjs"
+  ],
+  "exclusions": [
+    "runtime/**",
+    "outputs/**",
+    "work/game-secrets.json",
+    ".env*",
+    "*.log",
+    "*.tmp",
+    "*.lock",
+    "*.pem",
+    "*.key",
+    "*.pfx",
+    "*.p12"
+  ],
+  "targetMetadataFiles": [
+    {
+      "path": ".gitignore",
+      "sha256": "814677b6d4b03b530413dc60510384f38022a21540306e1503df11f63d5e033b"
+    },
+    {
+      "path": "copy-manifest.json",
+      "sha256": null
+    }
+  ],
+  "files": [
+    {
+      "path": "打包绿色版.cmd",
+      "size": 223,
+      "sha256": "d135b2480e0e82cdb5cd67e1c44a17df7cb318315690cecbe8318b26976d43d2"
+    },
+    {
+      "path": "启动系统.cmd",
+      "size": 41,
+      "sha256": "b763af86075be436036849a8abfaf5889106d59573ef618fc011fb31e4c0d105"
+    },
+    {
+      "path": "停止系统.cmd",
+      "size": 40,
+      "sha256": "e3b680b81a8982c86151f65c9a87f1719775ff0e7db413b682dfd583d47cca27"
+    },
+    {
+      "path": "重置账号凭据.cmd",
+      "size": 757,
+      "sha256": "ca2cb68f607c5525d6240b2f07131fcfe8a15d77ed56b348a6823819cb0d6f4a"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 11734,
+      "sha256": "560e06b38a5c27cb2531d0fea359f0172249777e1b2205fd551feb0036b51068"
+    },
+    {
+      "path": "ANALYSE.md",
+      "size": 26217,
+      "sha256": "309a78cc417fc043101a105b854a2bc9caac2690414d2047464e59753dc9c684"
+    },
+    {
+      "path": "bin/node/node.exe",
+      "size": 87074816,
+      "sha256": "ae1a50511be58e987483fdbc12125407443926d2d394669ade2352776e920dd3"
+    },
+    {
+      "path": "package.json",
+      "size": 2326,
+      "sha256": "ae266933ede7e4b5a8e0c71602db1243b47a8e700c46c1aa7ff8f8bf373bc6a6"
+    },
+    {
+      "path": "PORTABLE-RUNTIME.txt",
+      "size": 128,
+      "sha256": "1dfc521688ed7adb25f582702bf4e2c0bd455856d8474dff4924474360ad2dfe"
+    },
+    {
+      "path": "README-RUN.txt",
+      "size": 779,
+      "sha256": "0e254d85a770b824e3154b27bca02cd79922f356c59136fa5cc0602a9af7320a"
+    },
+    {
+      "path": "README.md",
+      "size": 2300,
+      "sha256": "d00137f40a70cf09e11583976c2d3afab0eed0db72540997a2caa88732793ac5"
+    },
+    {
+      "path": "reset-auto-plant-secrets.cmd",
+      "size": 735,
+      "sha256": "01abb0fc6dcc80a11e4b37839666372c174c84095e62a1d956ddab998e9cb6a4"
+    },
+    {
+      "path": "run-auto-plant-once.cmd",
+      "size": 862,
+      "sha256": "aaef32a4d41c2dfb8efec4198db301363a239b87b5391187de05928595b054f8"
+    },
+    {
+      "path": "run-auto-plant.cmd",
+      "size": 881,
+      "sha256": "93ccdf0b17e6b40da53a2b25728ce1bab401834bd084df51403b0955cdb62c49"
+    },
+    {
+      "path": "start-system.cmd",
+      "size": 849,
+      "sha256": "6ca55e4dd96f9202a9fc28cc3946e1b57eea4c1a8c76d84b8df425423160c3eb"
+    },
+    {
+      "path": "stop-system.cmd",
+      "size": 732,
+      "sha256": "70a456bedc0430281137b9849e896be83dd58636cc97ae3f7082855cb29dc8f7"
+    },
+    {
+      "path": "work/cyclic-note-state.mjs",
+      "size": 15056,
+      "sha256": "fd25d43eb64a965bceb483283cb6d16f476eccd4d929985a2de086749062e9da"
+    },
+    {
+      "path": "work/cyclic-note-state.test.mjs",
+      "size": 11110,
+      "sha256": "93c0709ebef8ccb00c7fa9b815c35190b5c35ad5a9d4709ce25003cdd948aac3"
+    },
+    {
+      "path": "work/extract-flower-names.mjs",
+      "size": 4522,
+      "sha256": "f573d05e285b906075db6c53919a0b82d221389086e258399623e4bbc079654a"
+    },
+    {
+      "path": "work/flower-level-config.mjs",
+      "size": 10488,
+      "sha256": "e9d8a99f09cfe85371ee175ff755162f1ae71423d17947cf8e7f670d5d7b5234"
+    },
+    {
+      "path": "work/flower-level-config.test.mjs",
+      "size": 3255,
+      "sha256": "1ef04d80b4907d3ba7d76bc64d1b04d791b8e8dd5ece0d99f39d787ef51aff1a"
+    },
+    {
+      "path": "work/flower-names.json",
+      "size": 14594,
+      "sha256": "537d1ed06d5c0930edb70209ac9c4c76b29f0f9d3f90c6ee10589b2a5e4d29d5"
+    },
+    {
+      "path": "work/flower-rack-state.mjs",
+      "size": 15788,
+      "sha256": "d82e9c39af6001c658035b118bcc14d4a5b752ab0e667b6b49b8219bcc2f235d"
+    },
+    {
+      "path": "work/flower-rack-state.test.mjs",
+      "size": 11382,
+      "sha256": "11fdd0a1ac666823e9240cd3feaa044d72b1cdae53470d803fee47e234860124"
+    },
+    {
+      "path": "work/flower-source-state.mjs",
+      "size": 4252,
+      "sha256": "549091536f8f6e3de6fcb1349fe4d0795b0cb9e2114fbfc7e20702121c73cdff"
+    },
+    {
+      "path": "work/flower-source-state.test.mjs",
+      "size": 1176,
+      "sha256": "4bd240123e595ae1ce6f57862e688da34a491cebd5a8fe6f3ded76f160459cd6"
+    },
+    {
+      "path": "work/fml-land-state.mjs",
+      "size": 6574,
+      "sha256": "c65772375ded89f18431b87ba04a0851fead6ba73b7f08a0c2da05a90577947f"
+    },
+    {
+      "path": "work/fml-land-state.test.mjs",
+      "size": 4611,
+      "sha256": "f91ea0f12711403f6d411caeee4d3683562b6c5704b86c5974b60ef04e98cb0e"
+    },
+    {
+      "path": "work/free-water-state.mjs",
+      "size": 8206,
+      "sha256": "55e87978cdfe659c4824a046243faa567b238a273626dc84cc94cdff4a55172b"
+    },
+    {
+      "path": "work/free-water-state.test.mjs",
+      "size": 2353,
+      "sha256": "5bf30b747a3fa6b80aefa030b982abdcbff21f9d2f8487de8ac5cd4ca0bbfccb"
+    },
+    {
+      "path": "work/g-data.29829.text",
+      "size": 3897154,
+      "sha256": "48686a642a420d774b1ac59b59f25252e6bbff91edb11f31096491730047c66c"
+    },
+    {
+      "path": "work/g-data.69b61.text",
+      "size": 3916907,
+      "sha256": "755166acdead05638dfacbbed666f34ce19d01f4f273aa0020c20ce2ed990920"
+    },
+    {
+      "path": "work/g-data.6cfce.text",
+      "size": 4052450,
+      "sha256": "859ab779c0974fda8cc8ce4910b95ae5384a78f3e5e5fd79f8b0fb4d036e8b7e"
+    },
+    {
+      "path": "work/g-data.9dc40.text",
+      "size": 4052636,
+      "sha256": "23a56c79611439e9d450c9e64def390f832d1e95446772794833129ce78d6d21"
+    },
+    {
+      "path": "work/g-data.fe15e.text",
+      "size": 4026781,
+      "sha256": "c14ece1e002df387e1231245cee9f8eea435be4f179734028e296f3d90081b4c"
+    },
+    {
+      "path": "work/game-pkg-2021004163668677-latest.bin",
+      "size": 2679736,
+      "sha256": "e5fe0086ffc03b16055a98b6a9250be71f6c28787a9437c25760630822b5c6a5"
+    },
+    {
+      "path": "work/game-pkg-2021004163668677.bin",
+      "size": 2637182,
+      "sha256": "2442b36a6bdd745934820dcb06cff85468f99df25da478aa704d4873a0ba3bf3"
+    },
+    {
+      "path": "work/game-pkg-latest/2021004163668677.tar",
+      "size": 9635840,
+      "sha256": "b75994f08b2f68044caea4ef5312666a745363ee42e1bc121c6f8f367b6d8097"
+    },
+    {
+      "path": "work/game-pkg-latest/CERT.json",
+      "size": 595,
+      "sha256": "261618ecaa21949b86a47816364956e4901a70bb34c607e99e16cd3ceb6321d7"
+    },
+    {
+      "path": "work/game-pkg-latest/Manifest.xml",
+      "size": 186,
+      "sha256": "8c65ade79b48733a2a37626eb6e83753df90a07b81286bcbbf166b1c55a34d6f"
+    },
+    {
+      "path": "work/game-pkg-latest/SIGN.json",
+      "size": 754,
+      "sha256": "b191430acc09c47ce0b5078485c87abbe1d067865673785e03a88e33e1762dc0"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/_fileList",
+      "size": 23,
+      "sha256": "d5a61b1339323a4d8d4c3c6d48647e90bea0e665500e36e52a53e4eeb0593fa8"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/.mini-ide/project-ide.json",
+      "size": 66,
+      "sha256": "edd006f5414d758ed6567b272f12b647a5e6cb7a5f249034af0d6aee694e83ab"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/api_permission",
+      "size": 10407,
+      "sha256": "b0cd58e3d7f08132ef3844047ee7e891303c12b5e8d6a07ebc0a850ec45bc23b"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/appConfig.json",
+      "size": 34,
+      "sha256": "8653913723299f94a7207e7b82c43e19d09d67dee31d8e45859e96db463c61da"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/assets/raw/native/43/43e47eb3-587c-485d-afcf-c2ebaee52b35.edac0.wasm",
+      "size": 19541,
+      "sha256": "247320d373c56e67f9112d64171042ecf101503bf36aaa26c638f6be2457c607"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/game.js",
+      "size": 9237472,
+      "sha256": "7ea29d08cf3888970db5b3e35fa983317f3f9eb2f86c4077b2cb80795ebd2dec"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/game.json",
+      "size": 242,
+      "sha256": "3ec0bfcf911abfb56ee4f86b81a5622a7280c8646f19d20e120eb37f22be8ad1"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/bar0.png",
+      "size": 2118,
+      "sha256": "73142f90990d7e1c2f2cfcd3305aba772d18017509d1a23539f56e21e5329dc8"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/bar1.png",
+      "size": 1390,
+      "sha256": "6ac2524d8dcaaa6c90edeba0499e4e9b21e2e432486b63204e62746e30db1bea"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/bar3.png",
+      "size": 4430,
+      "sha256": "fb8ca0b0dc7ffb072fcd804319d3d8f14a7474d2387e041773480a7433a9361b"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/bg.jpg",
+      "size": 158622,
+      "sha256": "37e759bc87e52101ce8d9f57b151320c8048a2db68db527b24632f50631c22a3"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/bg2.jpg",
+      "size": 158622,
+      "sha256": "37e759bc87e52101ce8d9f57b151320c8048a2db68db527b24632f50631c22a3"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/image/copyright.png",
+      "size": 5406,
+      "sha256": "8415a8cb4a296a82e5ee57d8baed8d65919da47a12db38a9f78676fa9cd9f39d"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/modules.json",
+      "size": 1549,
+      "sha256": "16b97a0c07db192911bd8ba06fd725a480a6cd8cd8319d839172b9151dad81ab"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/src/cocos-js/assets/spine.js.mem-SHr00x7M.bin",
+      "size": 19953,
+      "sha256": "25ca5b739fdeb1df7125a443a628f6f5e3da3e25bf1a4e5adf49908b8e74543f"
+    },
+    {
+      "path": "work/game-pkg-latest/tar/src/settings.6f499.json",
+      "size": 2166,
+      "sha256": "caa97723f916be264e1f0ba54eff114b47e70425b897c26353287f98773ba192"
+    },
+    {
+      "path": "work/game-pkg/2021004163668677.tar",
+      "size": 9457664,
+      "sha256": "b5cdbe9dc9135b81ccc786c4ca8ee9b28185a90f3d9a3240bd52a9b3b57fa88c"
+    },
+    {
+      "path": "work/game-pkg/CERT.json",
+      "size": 599,
+      "sha256": "8adeb3a4a26586a7b45a3730fc0cdee5236fc2ab0f5b68d10c6072beac282d35"
+    },
+    {
+      "path": "work/game-pkg/Manifest.xml",
+      "size": 191,
+      "sha256": "0f9a5a528810359386d0f45f79a58e44bbec402087bc3570e74957a83df1d94b"
+    },
+    {
+      "path": "work/game-pkg/SIGN.json",
+      "size": 757,
+      "sha256": "a3e6325feadce1990bad54e3b7f6005a33ab073fd5efb30687cea64fb36324e3"
+    },
+    {
+      "path": "work/game-pkg/tar/_fileList",
+      "size": 23,
+      "sha256": "d5a61b1339323a4d8d4c3c6d48647e90bea0e665500e36e52a53e4eeb0593fa8"
+    },
+    {
+      "path": "work/game-pkg/tar/.mini-ide/project-ide.json",
+      "size": 66,
+      "sha256": "edd006f5414d758ed6567b272f12b647a5e6cb7a5f249034af0d6aee694e83ab"
+    },
+    {
+      "path": "work/game-pkg/tar/api_permission",
+      "size": 10407,
+      "sha256": "b0cd58e3d7f08132ef3844047ee7e891303c12b5e8d6a07ebc0a850ec45bc23b"
+    },
+    {
+      "path": "work/game-pkg/tar/appConfig.json",
+      "size": 34,
+      "sha256": "8653913723299f94a7207e7b82c43e19d09d67dee31d8e45859e96db463c61da"
+    },
+    {
+      "path": "work/game-pkg/tar/assets/raw/native/43/43e47eb3-587c-485d-afcf-c2ebaee52b35.edac0.wasm",
+      "size": 19541,
+      "sha256": "247320d373c56e67f9112d64171042ecf101503bf36aaa26c638f6be2457c607"
+    },
+    {
+      "path": "work/game-pkg/tar/game.js",
+      "size": 9059207,
+      "sha256": "7a356790b7483397ef776201401cefe1d3cdfb32161f134263c16c7ed6865b6e"
+    },
+    {
+      "path": "work/game-pkg/tar/game.json",
+      "size": 242,
+      "sha256": "3ec0bfcf911abfb56ee4f86b81a5622a7280c8646f19d20e120eb37f22be8ad1"
+    },
+    {
+      "path": "work/game-pkg/tar/image/bar0.png",
+      "size": 2118,
+      "sha256": "73142f90990d7e1c2f2cfcd3305aba772d18017509d1a23539f56e21e5329dc8"
+    },
+    {
+      "path": "work/game-pkg/tar/image/bar1.png",
+      "size": 1390,
+      "sha256": "6ac2524d8dcaaa6c90edeba0499e4e9b21e2e432486b63204e62746e30db1bea"
+    },
+    {
+      "path": "work/game-pkg/tar/image/bar3.png",
+      "size": 4430,
+      "sha256": "fb8ca0b0dc7ffb072fcd804319d3d8f14a7474d2387e041773480a7433a9361b"
+    },
+    {
+      "path": "work/game-pkg/tar/image/bg.jpg",
+      "size": 158622,
+      "sha256": "37e759bc87e52101ce8d9f57b151320c8048a2db68db527b24632f50631c22a3"
+    },
+    {
+      "path": "work/game-pkg/tar/image/bg2.jpg",
+      "size": 158622,
+      "sha256": "37e759bc87e52101ce8d9f57b151320c8048a2db68db527b24632f50631c22a3"
+    },
+    {
+      "path": "work/game-pkg/tar/image/copyright.png",
+      "size": 5406,
+      "sha256": "8415a8cb4a296a82e5ee57d8baed8d65919da47a12db38a9f78676fa9cd9f39d"
+    },
+    {
+      "path": "work/game-pkg/tar/modules.json",
+      "size": 1548,
+      "sha256": "47adfc174f2c44e3f458e39612359036f6be64218f4332268c187908f4e74b2b"
+    },
+    {
+      "path": "work/game-pkg/tar/src/cocos-js/assets/spine.js.mem-SHr00x7M.bin",
+      "size": 19953,
+      "sha256": "25ca5b739fdeb1df7125a443a628f6f5e3da3e25bf1a4e5adf49908b8e74543f"
+    },
+    {
+      "path": "work/game-pkg/tar/src/settings.6f499.json",
+      "size": 2166,
+      "sha256": "caa97723f916be264e1f0ba54eff114b47e70425b897c26353287f98773ba192"
+    },
+    {
+      "path": "work/garden-state.mjs",
+      "size": 40724,
+      "sha256": "b4ae632cee8465808245e8d909d044e38ffe63777eacbc51b6faa076d1c6297a"
+    },
+    {
+      "path": "work/garden-state.test.mjs",
+      "size": 39880,
+      "sha256": "01225bd289d0c8b5dbe00ec3d412a191429c6b6f5ad044c76146cdd894bf6c01"
+    },
+    {
+      "path": "work/inspect-garden-cycle.test.mjs",
+      "size": 343183,
+      "sha256": "ab64160af7a067b1421d8c4d64d54284cd0b81be04bdd349ec49816eb69cbf7b"
+    },
+    {
+      "path": "work/inspect-garden-dryrun.mjs",
+      "size": 379212,
+      "sha256": "7cec510291800334cb11a9d7ccf5bd859ffff9aa3d0b8e9a424d7c9e8cbf6807"
+    },
+    {
+      "path": "work/latest-game-info.json",
+      "size": 990,
+      "sha256": "5ac3f5be928bd657b0c4b575ad9f04d309ca9f6f96548ff4bbaf8eb569ecbe34"
+    },
+    {
+      "path": "work/log-retention.mjs",
+      "size": 2295,
+      "sha256": "76db584221f65fcff6084ce8c612615b2ffa8c39942d54d985c732a075d2eec4"
+    },
+    {
+      "path": "work/log-retention.test.mjs",
+      "size": 1771,
+      "sha256": "03978a50fa744701c04eb1f134ea5ab07b406e275402f2f6f224d54bf26ab7ad"
+    },
+    {
+      "path": "work/loop-interval.mjs",
+      "size": 1034,
+      "sha256": "c0ed671f41a30199fa9ce0bc75b581203521b1dcb83abfe312a41a9e7c2a0cda"
+    },
+    {
+      "path": "work/loop-interval.test.mjs",
+      "size": 907,
+      "sha256": "758e83dcc89a804367b2b6fa6feb8033978143accab35efa4852f5efe6746b8f"
+    },
+    {
+      "path": "work/main-task-state.mjs",
+      "size": 10617,
+      "sha256": "e2579109977d412e4e1db5e19fd612eebf10295854008c26792ebd7aa79b18d7"
+    },
+    {
+      "path": "work/main-task-state.test.mjs",
+      "size": 7540,
+      "sha256": "d0c725b7f8c668624c2d83df6c3a98fbfae0fd9586e5b77fab2333487b422679"
+    },
+    {
+      "path": "work/material-shop-state.mjs",
+      "size": 9323,
+      "sha256": "62e89d3daae03da2d072eb49c03a30578d8b7bd696da1a73a9d226e43433e26a"
+    },
+    {
+      "path": "work/material-shop-state.test.mjs",
+      "size": 3810,
+      "sha256": "8e7bc3b3dde3ea3933608e405adc60722fb0d7d6b942f644e8c7dc3b9fa6a939"
+    },
+    {
+      "path": "work/order-state.mjs",
+      "size": 52225,
+      "sha256": "5b14cc70a69e3672eab002d1e37997cf0f9815b19fa639797b2444a218b0401d"
+    },
+    {
+      "path": "work/order-state.test.mjs",
+      "size": 47192,
+      "sha256": "945d9096491d68da4fbbd3ff9a3a83766f5bae203c4591a48e4b52e7d7f3244b"
+    },
+    {
+      "path": "work/package-system.ps1",
+      "size": 2375,
+      "sha256": "a962ad0e594c799dfed01219fee29c6a48bdb9d217a71f1416cc1623d08ab510"
+    },
+    {
+      "path": "work/pearl-state.mjs",
+      "size": 16362,
+      "sha256": "15f1a957344b391e5506b1b5f4fb08d11b3e8de0d40ff58935e93a238a3319fa"
+    },
+    {
+      "path": "work/pearl-state.test.mjs",
+      "size": 7918,
+      "sha256": "2dfd9a12776549c1cadd1fcb620cd646746a924af2d40174e68fe4f6cda82ef1"
+    },
+    {
+      "path": "work/reset-system-accounts.ps1",
+      "size": 539,
+      "sha256": "15581ddee3ebb6f2b764085ab89d424d54904670a50465c704b35b95aa756ddb"
+    },
+    {
+      "path": "work/resources-config-578a1.json",
+      "size": 1140270,
+      "sha256": "5d7ca35c04491d0d1f090ae418aaba4ed3efde5b8f402612e901f0e8aa96b756"
+    },
+    {
+      "path": "work/resources-config-959d4.json",
+      "size": 1170189,
+      "sha256": "532399b82b46711d458a08d5fac35733baa8510826f9cd15d9b0b61f3bd16f60"
+    },
+    {
+      "path": "work/resources-config-af581.json",
+      "size": 1143445,
+      "sha256": "0a6fd1023c3fa50d7d9184059e7e2b3e4e0a3cba805c166c5668691f71f6275f"
+    },
+    {
+      "path": "work/resources-config-bce02.json",
+      "size": 1140270,
+      "sha256": "d9b9c3d89d5adf4462f00408302fe937b74cab3c6f7f74323235cd36d6c577cc"
+    },
+    {
+      "path": "work/resources-config-c83ac.json",
+      "size": 1186656,
+      "sha256": "9e877aa57c3bab5cef19218b931d687fff63f538faf6bb37d9a661858844427f"
+    },
+    {
+      "path": "work/resources-pack-06938805f.4baf1.json",
+      "size": 646846,
+      "sha256": "a156b28cd1d2d8e0a7e023c992834dd987b13aefb91ff1c99f1aaa6e5fdd7735"
+    },
+    {
+      "path": "work/run-auto-plant.ps1",
+      "size": 9356,
+      "sha256": "3e7cac83119a5941ca1ff7bb0ab8d75a4fbf90e5f13e2448118e890867e8b570"
+    },
+    {
+      "path": "work/run-history.mjs",
+      "size": 5692,
+      "sha256": "fc878124524df70f6ed9e529ac2eafd71a8e5c7fdeb99e78dd5c2288bd20ad65"
+    },
+    {
+      "path": "work/run-history.test.mjs",
+      "size": 3370,
+      "sha256": "b19182286c829575eb8ce031546dadfd4796f9006e11531ba85af24307fa31d2"
+    },
+    {
+      "path": "work/start-system.ps1",
+      "size": 4450,
+      "sha256": "55078e52d9c2aaaa9b8c7c1a42836b07dc6b354f737b6949476de1cc706c4bd6"
+    },
+    {
+      "path": "work/static-config-path.mjs",
+      "size": 4036,
+      "sha256": "716b5ead7dfcfe05a5642851d0b91717fa96957bbf605a759235710a63e617e0"
+    },
+    {
+      "path": "work/static-config-path.test.mjs",
+      "size": 2734,
+      "sha256": "79ad31af7c3e817378fbb5e905f65ac4c733ff596bdff50177f8a2e655059742"
+    },
+    {
+      "path": "work/status-doc-write.test.mjs",
+      "size": 2527,
+      "sha256": "6aa2a19248d2cc4a5e403da55b8bf1abb62b13debceb114d11b145123349aa37"
+    },
+    {
+      "path": "work/status-format.mjs",
+      "size": 3948,
+      "sha256": "e7849b0c6304d79edc4efd45efafe901ee46c46b5755e321f8ef40a5043ea3af"
+    },
+    {
+      "path": "work/status-format.test.mjs",
+      "size": 2378,
+      "sha256": "a1d2841dcae6e04db4f304e0a688ce774fa8ddd8d54503453fa0e776dd5f73cd"
+    },
+    {
+      "path": "work/stop-system.ps1",
+      "size": 3446,
+      "sha256": "bb37cbc83601a7a4d3badb37f83f9c855b6619daaf15b117674d6df861949fca"
+    },
+    {
+      "path": "work/sync-latest-static-config.mjs",
+      "size": 44338,
+      "sha256": "fdf85a0371f06c0a5946b4f8563610dbcc7e7c4d13cf9481e45fcf58e631c372"
+    },
+    {
+      "path": "work/sync-latest-static-config.ps1",
+      "size": 2486,
+      "sha256": "7228ffe17b6a0a1c8670f6fd75893cb1b6013d298781e0d7b8ac2c15ea91c533"
+    },
+    {
+      "path": "work/sync-latest-static-config.test.mjs",
+      "size": 11226,
+      "sha256": "7b68f2db44fae47002ff107146cdacdbf80045050f1ffc6e583cdc4c3707d0a6"
+    },
+    {
+      "path": "work/system-credentials.test.mjs",
+      "size": 2217,
+      "sha256": "ada22b2f6653950e575cdd2fbb2b3dbab1cbb1fd409533e2ec134c7b489115b4"
+    },
+    {
+      "path": "work/system-dpapi.test.mjs",
+      "size": 1098,
+      "sha256": "f86957801d0f0ab43d87b2d7f64bede66a7573ec3015692430163af6695a2bd3"
+    },
+    {
+      "path": "work/system-entrypoint-scripts.test.mjs",
+      "size": 2880,
+      "sha256": "38b0e6452b79b9d29a88fa8e94891a9e7cda1779a1a9b85826bc486ec95903c9"
+    },
+    {
+      "path": "work/system-legacy-credentials.test.mjs",
+      "size": 4313,
+      "sha256": "a4a4b7b67f5922546ba2b95db015848de5eb8240f129ac5475d831f479977c83"
+    },
+    {
+      "path": "work/system-package-plan.test.mjs",
+      "size": 6673,
+      "sha256": "03af34d4f163e49abff4c2f144f1f87c08cf2d7124b07cdf508117f39865920b"
+    },
+    {
+      "path": "work/system-process-manager.test.mjs",
+      "size": 44955,
+      "sha256": "479e16edd69fe13929001c6f0a471f28d444d5d1aba34fdd91f9afe9269a76c3"
+    },
+    {
+      "path": "work/system-profile-store.test.mjs",
+      "size": 8049,
+      "sha256": "80420a4f8df65c6d9eea4f7fea0fb29ba326b52cdec12454d7a2f92c87d32d19"
+    },
+    {
+      "path": "work/system-public-app.test.mjs",
+      "size": 10762,
+      "sha256": "5558c892bae06143d11824b77d08303694c90bac89676bf92f6c3a70c8348007"
+    },
+    {
+      "path": "work/system-runtime-lock.test.mjs",
+      "size": 10251,
+      "sha256": "c472fa23bdd291ab05d863d6e2e3bfc2b38bfe91603e802bc5e2f0bd3198ba3d"
+    },
+    {
+      "path": "work/system-server.test.mjs",
+      "size": 24861,
+      "sha256": "eec6edbed87fb99a5253c9f7d97e51d7ad21e1ee77253946bc10ad8701727a6c"
+    },
+    {
+      "path": "work/system-status-store.test.mjs",
+      "size": 2530,
+      "sha256": "a4db240a19bf9ae4442dd9a8313c7cb8919211b658fefe66af87d67bc0270cc8"
+    },
+    {
+      "path": "work/system-status-summary.test.mjs",
+      "size": 8811,
+      "sha256": "a556c0ec4f9266981109d6801a2b9deb7f7775ff1cd2c12953125f8a03d7eef3"
+    },
+    {
+      "path": "work/system-ui-copy.test.mjs",
+      "size": 19275,
+      "sha256": "ccdb6a4c9ec9ce589e3fe53fa58764c3cf0d9ff719dd5a534e39d9956c2d40cb"
+    },
+    {
+      "path": "work/system/automation-worker.mjs",
+      "size": 5417,
+      "sha256": "7f9b784208d403cfa2a61f60b81566412fb1d4f725861e9eedbe20c812349ecb"
+    },
+    {
+      "path": "work/system/credentials.mjs",
+      "size": 5017,
+      "sha256": "777636a2002ecfbfed18ff8734124338e13d662285e67a264a1c43671557e99f"
+    },
+    {
+      "path": "work/system/dpapi.mjs",
+      "size": 1814,
+      "sha256": "ac780bdd288814ca29607f21f7c2dfc5c93b47eedf6a7afce1952890d713db7b"
+    },
+    {
+      "path": "work/system/legacy-credentials.mjs",
+      "size": 5664,
+      "sha256": "c2fa82e9ef8f96d7c08e16a3269ea2889cd95c0c958a4b65a02fc3b104f906a5"
+    },
+    {
+      "path": "work/system/package-green.mjs",
+      "size": 11033,
+      "sha256": "d02c0f15653d8d3313a6cc40ee4d0b9226f73dbce774cf356b4932d3c153f023"
+    },
+    {
+      "path": "work/system/process-manager.mjs",
+      "size": 35907,
+      "sha256": "9dfca7cad1411062f077bf05c2025473e6a5e0e23a06c08aecc3b7113f7b3c78"
+    },
+    {
+      "path": "work/system/profile-store.mjs",
+      "size": 8924,
+      "sha256": "459e56dcd0a349cf4de1b5bb55375dab16d30c4e11ed9a062f933e2d1d63f178"
+    },
+    {
+      "path": "work/system/public/app.js",
+      "size": 58088,
+      "sha256": "68570b86d701255d0138c14313029dfd4e8cae7f6d7e0f39e6a5724ec3820ccd"
+    },
+    {
+      "path": "work/system/public/index.html",
+      "size": 8412,
+      "sha256": "1de5fd9342bb254e51e0defac49fb26de06876e1890ffa72cd1edec4db152c03"
+    },
+    {
+      "path": "work/system/public/styles.css",
+      "size": 25764,
+      "sha256": "d8436d950fbc7d7add21a49c33492a68142a67b877909abb33cbd9e5e614ceb3"
+    },
+    {
+      "path": "work/system/runtime-lock.mjs",
+      "size": 11034,
+      "sha256": "4c2e210ba8a8f5be0505a68ddd911c513a29a276ce565b9b0bc275396d64d33b"
+    },
+    {
+      "path": "work/system/server.mjs",
+      "size": 25603,
+      "sha256": "2ede19e1ec8781253601d85896b3e3254db43bd51dedf91dc7e98ef5496e428a"
+    },
+    {
+      "path": "work/system/status-store.mjs",
+      "size": 5549,
+      "sha256": "7522d34397a049bbf314593b747570e69dff71434de6f8dc39bcb9817d6baf24"
+    },
+    {
+      "path": "work/system/status-summary.mjs",
+      "size": 5292,
+      "sha256": "db1cbc3682300c1ad8d6bbcf4c291b6c9d1745dc04b363ea04afc6715a9bf824"
+    },
+    {
+      "path": "work/waterwheel-state.mjs",
+      "size": 8268,
+      "sha256": "8de7c81c74d42e96addaebf8e18f2d9a6051388c3d9c152066b5db87580c6040"
+    },
+    {
+      "path": "work/waterwheel-state.test.mjs",
+      "size": 4348,
+      "sha256": "73c8017b5aecee36447119ac88bbda205d6851b55498d7eb8fca2ee34cfd8e67"
+    }
+  ]
+}

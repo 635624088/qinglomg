@@ -1,0 +1,14 @@
+# 运行时数据与凭据
+runtime/
+token*.json
+*_cache*.json
+*_token*.json
+*.cookie*
+.env
+__pycache__/
+*.pyc
+node_modules/
+*.bak
+*.bak_*
+*.log
+*.tar.gz

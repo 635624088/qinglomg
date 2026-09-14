@@ -1,0 +1,17 @@
+{
+  "name": "xjskp-client-analysis-tools",
+  "private": true,
+  "version": "1.0.1",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "analyze": "node ./bin/run-client-analysis.mjs",
+    "analyze:rebuild-same-source": "node ./bin/run-client-analysis.mjs --rebuild-existing-same-source",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "acorn": "8.17.0",
+    "acorn-walk": "8.3.5",
+    "astring": "1.9.0"
+  }
+}
